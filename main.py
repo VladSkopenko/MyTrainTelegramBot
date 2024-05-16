@@ -1,9 +1,12 @@
-from aiogram import Bot, Dispatcher
-from aiogram.client.bot import DefaultBotProperties
 import asyncio
-from dotenv import load_dotenv
 import os
 
+from aiogram import Bot
+from aiogram import Dispatcher
+from aiogram.client.bot import DefaultBotProperties
+from dotenv import load_dotenv
+
+from src.utils.commands import set_commands
 load_dotenv()
 
 token = os.getenv('TOKEN')
@@ -14,6 +17,7 @@ dp = Dispatcher()
 
 
 async def start_bot(bot: Bot):
+    await set_commands(bot)
     await bot.send_message(admin_id, 'bot running')
 
 
