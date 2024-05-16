@@ -8,6 +8,8 @@ from dotenv import load_dotenv
 
 from src.handlers.start import get_start_and_choice_lang
 from aiogram.filters import Command
+
+from src.handlers.start import language_callback
 from src.utils.commands import set_commands
 
 load_dotenv()
@@ -26,6 +28,8 @@ async def start_bot(bot: Bot):
 
 dp.startup.register(start_bot)
 dp.message.register(get_start_and_choice_lang, Command(commands=['start']))
+dp.message.register(get_start_and_choice_lang, Command(commands=['language']))
+dp.callback_query.register(language_callback)
 
 
 async def start():
