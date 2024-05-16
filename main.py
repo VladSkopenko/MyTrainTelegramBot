@@ -6,7 +6,10 @@ from aiogram import Dispatcher
 from aiogram.client.bot import DefaultBotProperties
 from dotenv import load_dotenv
 
+from src.handlers.start import get_start_and_choice_lang
+from aiogram.filters import Command
 from src.utils.commands import set_commands
+
 load_dotenv()
 
 token = os.getenv('TOKEN')
@@ -22,6 +25,7 @@ async def start_bot(bot: Bot):
 
 
 dp.startup.register(start_bot)
+dp.message.register(get_start_and_choice_lang, Command(commands=['start']))
 
 
 async def start():
