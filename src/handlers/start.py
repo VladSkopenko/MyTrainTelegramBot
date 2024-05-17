@@ -27,4 +27,3 @@ async def language_callback(callback_query: CallbackQuery):
     else:
         lang_message = f"{callback_query.from_user.first_name}, выбран {lang} язык"
     await callback_query.message.answer(f"{lang_message}")
-    print(USERS_LANGS)

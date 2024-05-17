@@ -28,7 +28,6 @@ async def start_bot(bot: Bot):
 
 dp.startup.register(start_bot)
 dp.message.register(get_start_and_choice_lang, Command(commands=['start']))
-dp.message.register(get_start_and_choice_lang, Command(commands=['language']))
 dp.callback_query.register(language_callback)
 
 
