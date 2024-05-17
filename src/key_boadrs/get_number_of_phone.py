@@ -5,7 +5,7 @@ from aiogram.types import ReplyKeyboardMarkup
 keyboard_get_number = ReplyKeyboardMarkup(
     keyboard=[
         [
-            KeyboardButton(text="Відправити номер телефона"),
+            KeyboardButton(text="Відправити номер телефона", request_contact=True),
         ],
     ],
     resize_keyboard=True,

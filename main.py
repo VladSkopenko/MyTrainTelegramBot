@@ -6,7 +6,7 @@ from aiogram import Dispatcher
 from aiogram.client.bot import DefaultBotProperties
 from dotenv import load_dotenv
 
-from src.handlers.start import auth_users_callback
+from src.handlers.start import start_router
 from src.handlers.start import get_start_and_choice_lang
 from aiogram.filters import Command
 
@@ -30,9 +30,7 @@ async def start_bot(bot: Bot):
 dp.startup.register(start_bot)
 dp.message.register(get_start_and_choice_lang, Command(commands=["start"]))
 dp.callback_query.register(language_callback)
-dp.callback_query.register(auth_users_callback)
-
-
+dp.include_router(start_router)
 
 
 async def start():
