@@ -6,6 +6,7 @@ from aiogram import Dispatcher
 from aiogram.client.bot import DefaultBotProperties
 from dotenv import load_dotenv
 
+from src.handlers.start import auth_users_callback
 from src.handlers.start import get_start_and_choice_lang
 from aiogram.filters import Command
 
@@ -14,21 +15,24 @@ from src.utils.commands import set_commands
 
 load_dotenv()
 
-token = os.getenv('TOKEN')
-admin_id = os.getenv('ADMIN_ID')
+token = os.getenv("TOKEN")
+admin_id = os.getenv("ADMIN_ID")
 
-bot = Bot(token=token, default=DefaultBotProperties(parse_mode='HTML'))
+bot = Bot(token=token, default=DefaultBotProperties(parse_mode="HTML"))
 dp = Dispatcher()
 
 
 async def start_bot(bot: Bot):
     await set_commands(bot)
-    await bot.send_message(admin_id, 'bot running')
+    await bot.send_message(admin_id, "bot running")
 
 
 dp.startup.register(start_bot)
-dp.message.register(get_start_and_choice_lang, Command(commands=['start']))
+dp.message.register(get_start_and_choice_lang, Command(commands=["start"]))
 dp.callback_query.register(language_callback)
+dp.callback_query.register(auth_users_callback)
+
+
 
 
 async def start():
@@ -38,5 +42,5 @@ async def start():
         await bot.session.close()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     asyncio.run(start())
